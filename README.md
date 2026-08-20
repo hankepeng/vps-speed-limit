@@ -16,6 +16,26 @@
 - 测速实时动态显示，保存最近 3 次完整结果、时间与平均值
 - 菜单内一键更新脚本到最新版本
 
+## 支持的系统
+
+脚本依赖 Linux 内核的 tc/IFB 流量控制与 systemd，因此仅支持 Linux。
+
+| 系统 | 支持情况 | 说明 |
+|------|---------|------|
+| Debian / Ubuntu | 完全支持（推荐） | tc、IFB、systemd、curl 默认可用；speedtest 走 apt 安装 |
+| CentOS / RHEL / Rocky / AlmaLinux | 支持 | 用 `yum install iproute` 提供 tc；speedtest 走官方二进制 |
+| Fedora | 支持 | 依赖 iproute2 + systemd；speedtest 走官方二进制 |
+| Arch Linux | 支持 | 依赖 iproute2 + systemd；speedtest 走官方二进制 |
+| 其他 systemd 发行版 | 基本支持 | 需自行确认 iproute2、systemd、bash、curl |
+| Alpine / 无 systemd 发行版 | 受限 | 默认 OpenRC，需额外配置 systemd；bash/tc 需单独安装 |
+| Windows / macOS / BSD | 不支持 | 非 Linux，无 tc/IFB/systemd |
+
+**硬性依赖**：Linux 内核（IFB 模块 + tc）、bash、iproute2、systemd、curl、root 权限。
+
+**speedtest 架构**：x86_64 / amd64、aarch64 / arm64、armv7l / armhf、i386 / i686。
+
+> 容器（Docker）与 WSL 等受限环境通常无法使用 tc/IFB，需内核支持与特权模式。
+
 ## 一键安装 / 打开菜单
 
 ```bash
